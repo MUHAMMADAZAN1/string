@@ -4,13 +4,57 @@
 
 #include "gameFunctions.h"
 
-initializeBlankString() {}
+initializeBlankString(int length, char *string) {  
+  // check validaty
+  if(length <= 0 || string == NULL){
+    printf("Invalide input\n");
+    return;
+  }
+  for(int i = 0; i<length; i++){
+    string[i] = '_';
+  }
+  // store '/0' string end
+  string[length - 1] = '\0';
+}}
 
-printWithSpaces() {}
+printWithSpaces(const char *str) { 
+  if(str == NULL){
+    printf("Invalide Pointer...\n");
+    return;
+  }
+  // string.h Function to find length of string 
+  int length = strlen(str);
+  for(int i = 0; i<length; i++){
+    printf("%c ",str[i]);
+  }
+}}
 
-revealGuessedLetter() {}
+revealGuessedLetter(const char *salution,  char *revealed, char guessedLetter) {
+   if(salution == NULL || revealed == NULL){
+    printf("Invalide address..\n");
+    return 1;
+  }
+  int mode = 0;
+  // loop: both string not equal to the '\0' loop terminate
+  for(int i = 0; salution[i] != '\0' && revealed[i] != '\0';i++){
+    // if guess character equal to string character it will store the charater to revealed string return 1
+    if(revealed[i] == '_' && salution[i] == guessedLetter){
+      revealed[i] = guessedLetter;
+      mode = 1;
+    }
+  }
+  return mode;
+}}
 
-checkGuess() {}
+checkGuess(const char *salution, const char *revealed) {  
+  if(salution == NULL || revealed == NULL){
+    printf("Invalide\n");
+    return 0;
+  }
+  int result = strcmp(salution, revealed);
+  return (result == 0)? 1: 0;
+}
+}
 
 void startGame(char word[25]) {
   int won = 0;  // Flag to see if the user has won yet
